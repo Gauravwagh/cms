@@ -24,7 +24,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['consultaddcms.herokuapp.com']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -123,7 +123,7 @@ INSTALLED_APPS = (
 
 #Storage on S3 settings are stored as os.environs to keep settings.py clean
 if not DEBUG:
-   AWS_STORAGE_BUCKET_NAME = "empfood"
+   AWS_STORAGE_BUCKET_NAME = "emapfood"
    AWS_ACCESS_KEY_ID = "AKIAINZDWPA52WPEE6TA"
    AWS_SECRET_ACCESS_KEY = "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"
    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
