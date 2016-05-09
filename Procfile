@@ -1,1 +1,1 @@
-web: gunicorn django15/wsgi.py --noreload
+web: gunicorn django15/wsgi.py
