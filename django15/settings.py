@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'whatever',
     'storages',
     'boto',
+    'gunicorn',
 )
 
 
