@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <table id="table_id" class="display table table-striped">
+    <thead>
+        <tr>
+            <th>Employee Id</th>
+            <th>Name</th>
+            <th>Lunch</th>
+            <th>Dinner</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for key, values in food.items %}
+        <tr>
+            <td>{{ key.employee_id }}</td>
+            <td>{{ key.employee_name }}</td>
+            <td>{{ values.0 }}</td>
+            <td>{{ values.1 }}</td>
+            <td>{{ values.2 }}</td>
+        </tr>
+   {% endfor %}
+    </tbody>
+</table>
+<script>
+$(document).ready( function () {
+    $('#home').removeClass("active");
+    $('#list').addClass("active");
+
+    $('#table_id').dataTable({
+        "pageLength": 1000
+    });
+
+} );
+</script>
+{% endblock %}
+
+

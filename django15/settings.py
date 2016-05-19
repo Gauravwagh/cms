@@ -5,7 +5,8 @@ import os
 PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(PROJECT_ROOT)
 
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -115,11 +116,18 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
-    'whatever',
+    'cms',
     'storages',
     'boto',
     'gunicorn',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 )
+
+LOGIN_REDIRECT_URL = "/"
 
 
 #Storage on S3 settings are stored as os.environs to keep settings.py clean

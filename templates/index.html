@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 
-{% block sidebar %}
-<li><a href="/">Home</a></li>
-<li><a href="/add">Add</a></li>
-{% endblock %}
 
 {% block content %}
 
-{% if whatever.count > 0 %}
-{% for w in whatever %}
-<div>
-<h2>{{ w.title }}</a></h2>
-<p>{{ w.body }}</p>
+    <div class="jumbotron">
+        <h3>Upload File</h3>
+        <form action="/" method="post" enctype="multipart/form-data" id="main_form_id">{% csrf_token %}
+{#            {{ form.as_p }}#}
+{#            <p><label for="id_file">Upload File:</label> <input id="id_file" name="file" type="file"></p>#}
+
+            <div class="fileinput fileinput-new input-group" data-provides="fileinput">
+  <div class="form-control" data-trigger="fileinput"><i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div>
+  <span class="input-group-addon btn btn-default btn-file"><span class="fileinput-new">Select file</span><span class="fileinput-exists">Change</span><input type="file" name="file" id="id_file"></span>
+  <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a>
 </div>
-{% endfor %}
-{% else %}
-<p>Nothing.</p>
-{% endif %}
+
+            <input type="submit" align="center" style="margin-left: 45%;" class="btn btn-info" value="Submit">
+        </form>
+
+    </div>
 
 {% endblock %}
