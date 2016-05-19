@@ -6,6 +6,7 @@ PROJECT_ROOT = os.path.realpath(os.path.dirname(__file__))
 SITE_ROOT = os.path.dirname(PROJECT_ROOT)
 
 DEBUG = True
+# New comment
 # DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
