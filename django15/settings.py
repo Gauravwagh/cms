@@ -133,11 +133,11 @@ LOGIN_REDIRECT_URL = "/"
 
 #Storage on S3 settings are stored as os.environs to keep settings.py clean
 if not DEBUG:
-   AWS_STORAGE_BUCKET_NAME = "emapfood"
-   AWS_ACCESS_KEY_ID = "AKIAINZDWPA52WPEE6TA"
-   AWS_SECRET_ACCESS_KEY = "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"
-   STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-   S3_URL = 'http://%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+   AWS_STORAGE_BUCKET_NAME = ""
+   AWS_ACCESS_KEY_ID = ""
+   AWS_SECRET_ACCESS_KEY = ""
+   STATICFILES_STORAGE = ''
+   S3_URL = ''
    STATIC_URL = S3_URL
 
 
