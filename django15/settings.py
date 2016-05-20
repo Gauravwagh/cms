@@ -130,7 +130,7 @@ INSTALLED_APPS = (
 
 LOGIN_REDIRECT_URL = "/"
 
-
+STATICFILES_DIRS = (os.path.join(os.path.dirname(SITE_ROOT), "static", "app"))
 #Storage on S3 settings are stored as os.environs to keep settings.py clean
 # if not DEBUG:
 AWS_STORAGE_BUCKET_NAME = "emapfood"
