@@ -8,7 +8,7 @@ urlpatterns = patterns('',
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^accounts/', include('allauth.urls')),
                        url(r'^$', 'cms.views.upload_file'),
-                       url(r'^list/$', 'cms.views.list'),
+                       url(r'^employee/$', 'cms.views.list'),
                        url(r'^report/$', 'cms.views.report'),
                        url(r'^export/$', 'cms.views.export'),
                        )

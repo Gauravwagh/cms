@@ -1,6 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
+    {% include 'cms/models.html' %}
+    <div class="add-emp-div">
+            <span class="btn-add-emp"><button class="btn btn-info" data-toggle="modal" data-target="#myModal">Add Employee</button></span>
+    </div>
     <table id="table_id" class="display table table-striped">
     <thead>
         <tr>
@@ -22,6 +26,7 @@
 <script>
 $(document).ready( function () {
     $('#home').removeClass("active");
+    $('#report').removeClass("active");
     $('#list').addClass("active");
 
     $('#table_id').dataTable( {

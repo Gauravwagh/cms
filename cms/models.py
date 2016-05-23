@@ -31,3 +31,12 @@ class Food(models.Model):
 
 	def __unicode__(self):
 		return self.employee.employee_id
+
+
+class FoodAll(models.Model):
+	employee 		= models.ForeignKey(Employee, null=True, blank=True)
+	type			= models.CharField(choices=FOOD_TYPE,max_length=200, null=True, blank=True)
+	avail_datetime	= models.DateTimeField(null=True, blank=True)
+
+	def __unicode__(self):
+		return self.employee.employee_id

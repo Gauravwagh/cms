@@ -2,7 +2,7 @@ from django.shortcuts import render_to_response, render
 from django.contrib.auth.decorators import login_required
 from cms.models import Whatever
 from cms.forms import UploadFileForm
-from cms.models import Employee, Food
+from cms.models import Employee, Food, FoodAll
 from django.core.context_processors import csrf
 from django.utils import timezone
 from django.http import HttpResponse, HttpResponseRedirect
@@ -36,7 +36,7 @@ def upload_file(request):
 		# 		except:
 		# 			pass
 
-
+		emppp = Food.objects.all().delete()
 		data = pd.read_csv(request.FILES['file'])  # you can also add params such as header, sep etc.
 		array = data.values
 		# print array
@@ -63,6 +63,12 @@ def upload_file(request):
 					food = Food.objects.get(employee=emp, type=type, avail_datetime=dt)
 				except:
 					food = Food(employee=emp, type=type, avail_datetime=dt)
+					food.save()
+
+				try:
+					foodall = FoodAll.objects.get(employee=emp, type=type, avail_datetime=dt)
+				except:
+					food = FoodAll(employee=emp, type=type, avail_datetime=dt)
 					food.save()
 			except:
 				pass
@@ -114,22 +120,34 @@ def upload_file(request):
 
 def list(request):
 	emp = Employee.objects.all()
-	# emppp = Food.objects.all().delete()
-	return render(request, 'cms/list.html',{"emp":emp})
+	form = UploadFileForm()
+	if request.method == "POST":
+		data = pd.read_csv(request.FILES['file'])  # you can also add params such as header, sep etc.
+		array = data.values
+		for one in data:
+			try:
+				emp = Employee.objects.get(employee_id=one[0])
+			except:
+				emp = Employee(employee_id=one[0], employee_name=one[1], email = one[2])
+	return render(request, 'cms/list.html',{"emp":emp, "form":form})
 
 def report(request):
 	emp_id = Employee.objects.all()
 	data = {}
 	month = ""
+	year = ""
 	for emp in emp_id:
 
 		emp_data = []
 		emp_food = Food.objects.filter(employee=emp)
+		# year = emp_food[0].avail_datetime.strftime('%Y')
+		# print year, "&&&&&&&&&&&"
 		lunch = 0
 		dinner = 0
 		total = 0
 		for i in emp_food:
 			month = i.avail_datetime.strftime('%B')
+			year = i.avail_datetime.strftime('%Y')
 			total = total + 1
 			# print i.avail_datetime.strftime('%B'), i.avail_datetime, "-------"
 			if i.avail_datetime.hour >= 5:
@@ -141,8 +159,8 @@ def report(request):
 		emp_data.append(dinner)
 		emp_data.append(total)
 		data[emp] = emp_data
-	print data, "%%%%%%%%%"
-	return render(request, 'cms/report.html',{"month":month, "food":data})
+	date =  month + " "+ year
+	return render(request, 'cms/report.html',{"month":month, "food":data, "date":date})
 
 
 def export(request):
@@ -169,7 +187,6 @@ def export(request):
 		emp_data.append(dinner)
 		emp_data.append(total)
 		data[emp] = emp_data
-	print data, "%%%%%%%%%"
 
 	# Create the HttpResponse object with the appropriate CSV header.
 	response = HttpResponse(content_type='text/csv')

@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+    <h4 align="center"><strong>{{ date }}</strong></h4>
+        <div class="add-emp-div">
+             <span class="btn-add-emp"><a href="/export/" class="btn btn-warning">Export to CSV</a></span>
+    </div>
+
     <table id="table_id" class="display table table-striped">
     <thead>
         <tr>
@@ -26,10 +31,11 @@
 <script>
 $(document).ready( function () {
     $('#home').removeClass("active");
-    $('#list').addClass("active");
+    $('#list').removeClass("active");
+    $('#report').addClass("active");
 
     $('#table_id').dataTable({
-        "pageLength": 1000
+        "pageLength": 100
     });
 
 } );
