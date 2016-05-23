@@ -119,7 +119,7 @@ def upload_file(request):
 	return render(request, 'index.html',{"form":form})
 
 def list(request):
-	emp = Employee.objects.all()
+	empdata = Employee.objects.all()
 	form = UploadFileForm()
 	if request.method == "POST":
 		data = pd.read_csv(request.FILES['file'])  # you can also add params such as header, sep etc.
@@ -129,7 +129,7 @@ def list(request):
 				emp = Employee.objects.get(employee_id=one[0])
 			except:
 				emp = Employee(employee_id=one[0], employee_name=one[1], email = one[2])
-	return render(request, 'cms/list.html',{"emp":emp, "form":form})
+	return render(request, 'cms/list.html',{"emp":empdata, "form":form})
 
 def report(request):
 	emp_id = Employee.objects.all()
@@ -137,7 +137,6 @@ def report(request):
 	month = ""
 	year = ""
 	for emp in emp_id:
-
 		emp_data = []
 		emp_food = Food.objects.filter(employee=emp)
 		# year = emp_food[0].avail_datetime.strftime('%Y')
