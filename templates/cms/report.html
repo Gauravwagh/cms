@@ -5,26 +5,32 @@
         <div class="add-emp-div">
              <span class="btn-add-emp"><a href="/export/" class="btn btn-warning">Export to CSV</a></span>
     </div>
-
-    <table id="table_id" class="display table table-striped">
+    <table id="table_id" class="display table">
     <thead>
+
         <tr>
             <th>Employee Id</th>
             <th>Name</th>
             <th>Lunch</th>
             <th>Dinner</th>
             <th>Total</th>
+            <th>Dates</th>
         </tr>
     </thead>
     <tbody>
     {% for key, values in food.items %}
+        {% if not values.2 == 0 %}
         <tr>
             <td>{{ key.employee_id }}</td>
             <td>{{ key.employee_name }}</td>
             <td>{{ values.0 }}</td>
             <td>{{ values.1 }}</td>
             <td>{{ values.2 }}</td>
+            {% for dt in values.3 %}
+                <td>{{ dt.avail_datetime.date }}</td>
+            {% endfor %}
         </tr>
+        {% endif %}
    {% endfor %}
     </tbody>
 </table>

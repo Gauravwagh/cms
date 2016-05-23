@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response, render
+from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
 from cms.models import Whatever
 from cms.forms import UploadFileForm
@@ -46,7 +47,7 @@ def upload_file(request):
 			# print i[0], "***"
 			# print col1, "$$$$"
 			hsw = col1[1].split("/")
-			hsd = hsw[1]+"/"+hsw[1]+"/"+hsw[2]
+			hsd = hsw[1]+"/"+hsw[0]+"/"+hsw[2]
 			st_str = hsd + " " + col1[2]
 			# print st_str, "=+================="
 			hrs = col1[2].split(":")[0]
@@ -76,11 +77,8 @@ def upload_file(request):
 			i = i[0].split(" ")
 			ad[i[0]] = i[6], i[7]
 			datadict.append(ad)
+		return redirect('/report/')
 
-
-
-
-        #
 		# merged = {}
 		# for d in datadict:
 		# 	for k, v in d.items():
@@ -158,6 +156,7 @@ def report(request):
 		emp_data.append(lunch)
 		emp_data.append(dinner)
 		emp_data.append(total)
+		emp_data.append(emp_food)
 		data[emp] = emp_data
 	date =  month + " "+ year
 	return render(request, 'cms/report.html',{"month":month, "food":data, "date":date})
