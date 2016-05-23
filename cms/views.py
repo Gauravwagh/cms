@@ -59,11 +59,11 @@ def upload_file(request):
 			# print dt
 			try:
 				emp = Employee.objects.get(employee_id=col1[0])
-				try:
-					food = Food.objects.get(employee=emp, type=type, avail_datetime=dt)
-				except:
-					food = Food(employee=emp, type=type, avail_datetime=dt)
-					food.save()
+				# try:
+				# 	food = Food.objects.get(employee=emp, type=type, avail_datetime=dt)
+				# except:
+				# 	food = Food(employee=emp, type=type, avail_datetime=dt)
+				# 	food.save()
 
 				try:
 					foodall = FoodAll.objects.get(employee=emp, type=type, avail_datetime=dt)
