@@ -129,6 +129,7 @@ def list(request):
 				emp = Employee.objects.get(employee_id=one[0])
 			except:
 				emp = Employee(employee_id=one[0], employee_name=one[1], email = one[2])
+				emp.save()
 	return render(request, 'cms/list.html',{"emp":empdata, "form":form})
 
 def report(request):
