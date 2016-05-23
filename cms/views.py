@@ -124,7 +124,7 @@ def list(request):
 	if request.method == "POST":
 		data = pd.read_csv(request.FILES['file'])  # you can also add params such as header, sep etc.
 		array = data.values
-		for one in data:
+		for one in array:
 			try:
 				emp = Employee.objects.get(employee_id=one[0])
 			except:
