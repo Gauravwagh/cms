@@ -166,10 +166,17 @@ def export(request):
 	emp_id = Employee.objects.all()
 	data = {}
 	month = ""
-	for emp in emp_id:
 
+	for emp in emp_id:
+		abd = []
 		emp_data = []
 		emp_food = Food.objects.filter(employee=emp)
+		emp_food_data = Food.objects.filter(employee=emp).values_list('avail_datetime', flat=True)
+
+		for i in emp_food_data:
+			abd.append(str(i.date()))
+		abc = "  ||  ".join(abd)
+		# print abc
 		lunch = 0
 		dinner = 0
 		total = 0
@@ -185,15 +192,15 @@ def export(request):
 		emp_data.append(lunch)
 		emp_data.append(dinner)
 		emp_data.append(total)
+		emp_data.append(abc)
 		data[emp] = emp_data
 
 	# Create the HttpResponse object with the appropriate CSV header.
 	response = HttpResponse(content_type='text/csv')
-	response['Content-Disposition'] = 'attachment; filename="somefilename.csv"'
-
+	response['Content-Disposition'] = 'attachment; filename="data.csv"'
 	writer = csv.writer(response)
-	writer.writerow(['Employee ID', 'Name', 'Lunch', 'Dinner', 'Total'])
+	writer.writerow(['Employee ID', 'Name', 'Lunch', 'Dinner', 'Total','Dates'])
 	for key in data:
-		writer.writerow([key.employee_id, key.employee_name, data[key][0], data[key][1], data[key][2]])
+		writer.writerow([key.employee_id, key.employee_name, data[key][0], data[key][1], data[key][2], data[key][3]])
 
 	return response
